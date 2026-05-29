@@ -1,0 +1,197 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram name="Page-1" id="pHoTCppMmkSffUbPw-OG">
+    <mxGraphModel dx="1826" dy="1259" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xELkamH10cSAUg8blqq6-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-1" target="xELkamH10cSAUg8blqq6-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-1" target="xELkamH10cSAUg8blqq6-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-1" target="xELkamH10cSAUg8blqq6-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-1" value="TARGET_WORD" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="120" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-2" target="xELkamH10cSAUg8blqq6-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-2" value="LLM_speaker" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="280" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-3" target="xELkamH10cSAUg8blqq6-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-3" value="logits" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="420" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-5" target="xELkamH10cSAUg8blqq6-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-5" value="token_sampling()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="460" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-6" target="xELkamH10cSAUg8blqq6-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-6" value="TARGET WORD&amp;nbsp;&lt;div&gt;LIST&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="-100" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-8" target="xELkamH10cSAUg8blqq6-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-8" value="SAY-THING VOCABULARY" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="440" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-10" target="xELkamH10cSAUg8blqq6-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-10" value="WORD" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="530" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-12" target="xELkamH10cSAUg8blqq6-41">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="600" />
+              <mxPoint x="100" y="600" />
+              <mxPoint x="100" y="200" />
+              <mxPoint x="340" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-12" target="xELkamH10cSAUg8blqq6-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-12" value="WORD_SEQUENCE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="530" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-18" value="initial input: &quot;DESERT&quot;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;next input: &quot;DESERT, HOT&quot;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;next input: &quot;DESERT, HOT, PLACE&quot;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="200" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-19" value="Example:&lt;div&gt;TARGET_WORD = &quot;DESERT&quot;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="90" y="120" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-23" target="xELkamH10cSAUg8blqq6-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-23" value="+" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="430" y="540" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-28" target="xELkamH10cSAUg8blqq6-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-28" target="xELkamH10cSAUg8blqq6-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-28" value="WORD_SEQUENCE&lt;b&gt;[1:]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="530" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-29" value="&lt;div&gt;&quot;DESERT, HOT, PLACE&quot;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="480" y="490" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-30" value="&lt;div&gt;&quot;HOT, PLACE&quot;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="760" y="490" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-32" target="xELkamH10cSAUg8blqq6-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-32" value="LLM_guesser" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="330" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-34" target="xELkamH10cSAUg8blqq6-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-34" value="logits" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="290" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-35" target="xELkamH10cSAUg8blqq6-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-35" value="token_sampling()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="200" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-37" target="xELkamH10cSAUg8blqq6-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-37" value="TARGET WORD&amp;nbsp;&lt;div&gt;LIST&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="120" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-39" value="when people play this, they generally don&#39;t know the limited set of possible words that could be the target word.&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;buuut it could make training a lot easier if the LLM_guesser has a constrained output&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#D6B656;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="120" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-41" target="xELkamH10cSAUg8blqq6-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-41" target="xELkamH10cSAUg8blqq6-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="240" />
+              <mxPoint x="260" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-41" value="tokenizer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="220" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-44" target="xELkamH10cSAUg8blqq6-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-44" value="GUESS_WORD" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="120" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-45" value="reward_function()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="820" y="120" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-51" value="a reward function should provide some feedback signal based on whether the LLM_guesser guesses the original target word within a certain number of attempts by LLM_speaker&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;the big question is how can this reward function be used to fine-tune the LLM_speaker weights?&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#B85450;" vertex="1" parent="1">
+          <mxGeometry x="610" y="-50" width="200" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-52" value="length of WORD_SEQUENCE is basically the number of attempts made by LLM_speaker&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;this can inform the reward function so that the LLM_speaker can learn the number of attempts&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#D6B656;" vertex="1" parent="1">
+          <mxGeometry x="660" y="360" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-53" target="xELkamH10cSAUg8blqq6-45">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="-20" />
+              <mxPoint x="880" y="-20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-53" value="LLM_embedding" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="-120" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-55" value="an embedding model can compute a continuous error/distance value (e.g. cosine similarity) between the TARGET and GUESS WORD to offer a more precise feedback score." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#D6B656;" vertex="1" parent="1">
+          <mxGeometry x="950" y="-120" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-56" value="does the LLM_guesser also need to be trained or can its weights remain frozen?" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#D6B656;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="350" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-58" target="xELkamH10cSAUg8blqq6-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-58" target="xELkamH10cSAUg8blqq6-35">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1020" y="500" />
+              <mxPoint x="1020" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-58" value="tokenizer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="480" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-60" value="&lt;i&gt;if training neural nets from scratch, choice of tokenizer could also have a major impact&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#D6B656;" vertex="1" parent="1">
+          <mxGeometry x="460" y="170" width="120" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-61" value="does LLM_guesser have to be the same as LLM_speaker?" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#D6B656;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="480" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xELkamH10cSAUg8blqq6-62" value="how much of the pre-trained LLM should be fine-tuned? does it need extra layers?" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;fontColor=#B85450;" vertex="1" parent="1">
+          <mxGeometry x="460" y="280" width="120" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
