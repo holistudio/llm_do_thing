@@ -38,7 +38,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="xELkamH10cSAUg8blqq6-6" value="TARGET WORD&amp;nbsp;&lt;div&gt;LIST&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="280" y="-100" width="120" height="200" as="geometry" />
+          <mxGeometry x="280" y="-160" width="120" height="200" as="geometry" />
         </mxCell>
         <mxCell id="xELkamH10cSAUg8blqq6-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="xELkamH10cSAUg8blqq6-8" target="xELkamH10cSAUg8blqq6-5">
           <mxGeometry relative="1" as="geometry" />
