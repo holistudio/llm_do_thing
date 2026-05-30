@@ -179,5 +179,11 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
 *.dtmp
 *.bkp
+
+/.vscode
+
+*.DS_Store
+/src/llm/gpt2/124M
