@@ -10,10 +10,10 @@ def word_sampling(logits, word_complete, tokenizer, word_set=None):
 def reward_function(target_word, guess_word, given_word_seq, emb_model=foo):
     return score
 
-def main(train_epochs=10, num_rounds=10):
-    TARGET_WORD_LIST = ['desert']
+def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
+    TARGET_WORD_LIST = word_list
 
-    SAY_THING_VOCAB = []
+    SAY_THING_VOCAB = say_thing_vocab
 
     speaker = GPT()
     guesser = GPT()
@@ -84,4 +84,10 @@ def main(train_epochs=10, num_rounds=10):
             # guesser_scheduler.step()
 
 if __name__ == "__main__":
-    main()
+    with open("website_word_list.txt", "r") as f:
+        word_list = f.read().split('\n')
+
+    with open("say_thing_vocabulary.txt", "r") as f:
+        say_thing_vocab = f.read().split('\n')
+
+    main(word_list, say_thing_vocab)
