@@ -20,7 +20,7 @@ The diagram above highlights a lot of open questions and ideas that I'm hoping t
 
 And this is more RL-LLM Feedback than Human Feedback! 
 
-I'm excited.
+I'm excited. Though I'm sure the base LLM architecture matters a lot, I'm much more interested in at the moment on how the reward function can be formulated and be used to update the LLM weights/parameters and how to effectively limit/constrain the LLM's outputs to specific tokens/words (token sampling vs transfer learning layers).
 
 As a "first pass" I've coded a training loop in [/src/train.py](../src/train.py) using a GPT-2 model as a kind of placeholder...but there's a lot of stuff missing for things I need to figure out for the script to actually run.
 
