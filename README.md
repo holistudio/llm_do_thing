@@ -1,2 +1,3 @@
 # llm_do_thing
-person-do-thing with LLMs
+
+[person-do-thing](https://persondothing.com/) with LLMs
