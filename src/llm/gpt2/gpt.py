@@ -148,7 +148,7 @@ class TransformerBlock(nn.Module):
         return x
         
 class GPT(nn.Module):
-    def __init__(self, cfg, load=True, model_size='124M'):
+    def __init__(self, cfg=GPT_CONFIG_124M, load=True, model_size='124M'):
         super().__init__()
         self.tok_emb = nn.Embedding(cfg["vocab_size"], cfg["emb_dim"])
         self.pos_emb = nn.Embedding(cfg["context_length"], cfg["emb_dim"])
@@ -293,4 +293,4 @@ class GPT(nn.Module):
 if __name__ == '__main__':
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
-    model = GPT(cfg=GPT_CONFIG_124M).to(device)
+    model = GPT().to(device)
