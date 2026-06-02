@@ -35,6 +35,8 @@ def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
 
         speak_str = target_word
 
+        given_word_seq =  []
+        
         while len(given_word_seq) < num_rounds:
 
             speak_word_complete = False
