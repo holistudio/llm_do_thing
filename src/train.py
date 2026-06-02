@@ -7,8 +7,10 @@ from llm.gpt2.gpt import GPT
 def word_sampling(logits, word_complete, tokenizer, word_set=None):
     return word_part, word_complete
 
-def reward_function(target_word, guess_word, given_word_seq, emb_model=foo):
-    return score
+def reward_function(target_word, guess_word, given_word_seq, emb_model=None):
+    if target_word == guess_word:
+        return 1
+    return 0
 
 def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
     TARGET_WORD_LIST = word_list
@@ -36,7 +38,7 @@ def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
         speak_str = target_word
 
         given_word_seq =  []
-        
+
         while len(given_word_seq) < num_rounds:
 
             speak_word_complete = False
