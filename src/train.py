@@ -46,7 +46,6 @@ def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
                 speak_token_ids = speaker_tokenizer.encode(speak_str)
                 speak_token_ids = torch.tensor(speak_token_ids, dtype=torch.long).unsqueeze(0)
 
-                speaker.optimizer.zero_grad()
                 speak_logits = speaker(speak_token_ids)
                 speak_logits = speak_logits[:, -1, :]
 
@@ -75,9 +74,11 @@ def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
 
             reward = reward_function(target_word, guess_word, given_word_seq)
 
+            speaker_optimizer.zero_grad()
             speaker_loss = speaker_loss_function(reward)
             speaker_loss.backward()
 
+            # guesser_optimizer.zero_grad()
             # guesser_loss = guesser_loss_function(reward)
             # guesser_loss.backward()
 
