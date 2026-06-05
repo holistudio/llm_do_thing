@@ -159,7 +159,6 @@ class GPT(nn.Module):
         )
         self.final_norm = LayerNorm(cfg["emb_dim"])
 
-        # still needed for easy loading of GPT-2 pretrained weights
         self.out_head = nn.Linear(
             cfg["emb_dim"], cfg["vocab_size"], bias=False
         )
@@ -185,9 +184,155 @@ class GPT(nn.Module):
         x = self.trf_blocks(x)
         x = self.final_norm(x)
 
-        # skipped since another module only needs the emb_dim sized output
-        # logits = self.out_head(x)
-        return x
+        logits = self.out_head(x)
+        return logits
+    
+    def _load_gpt2_params_from_tf_ckpt(self, ckpt_path, settings):
+        # Initialize parameters dictionary with empty blocks for each layer
+        params = {"blocks": [{} for _ in range(settings["n_layer"])]}
+
+        # Iterate over each variable in the checkpoint
+        for name, _ in tf.train.list_variables(ckpt_path):
+            # Load the variable and remove singleton dimensions
+            variable_array = np.squeeze(tf.train.load_variable(ckpt_path, name))
+
+            # Process the variable name to extract relevant parts
+            variable_name_parts = name.split("/")[1:]  # Skip the 'model/' prefix
+
+            # Identify the target dictionary for the variable
+            target_dict = params
+            if variable_name_parts[0].startswith("h"):
+                layer_number = int(variable_name_parts[0][1:])
+                target_dict = params["blocks"][layer_number]
+
+            # Recursively access or create nested dictionaries
+            for key in variable_name_parts[1:-1]:
+                target_dict = target_dict.setdefault(key, {})
+
+            # Assign the variable array to the last key
+            last_key = variable_name_parts[-1]
+            target_dict[last_key] = variable_array
+
+        return params
+    
+    def _load_weights_into_gpt(self, params):
+        def assign(left, right):
+            if left.shape != right.shape:
+                raise ValueError(f"Shape mismatch. Left: {left.shape}, "
+                                "Right: {right.shape}"
+                )
+            return torch.nn.Parameter(torch.tensor(right))
+        
+        # set token and positional embedding weights
+        self.pos_emb.weight = assign(self.pos_emb.weight, params['wpe'])
+        self.tok_emb.weight = assign(self.tok_emb.weight, params['wte'])
+
+        for b in range(len(params["blocks"])): # for each transformer block
+
+            # np.split divides weights into three equal parts for query, key, and value components
+            q_w, k_w, v_w = np.split(
+                (params["blocks"][b]["attn"]["c_attn"])["w"], 3, axis=-1)
+            
+            # Q, K, V weights
+            self.trf_blocks[b].att.W_query.weight = assign(
+                self.trf_blocks[b].att.W_query.weight, q_w.T)
+            self.trf_blocks[b].att.W_key.weight = assign(
+                self.trf_blocks[b].att.W_key.weight, k_w.T)
+            self.trf_blocks[b].att.W_value.weight = assign(
+                self.trf_blocks[b].att.W_value.weight, v_w.T)
+            
+            # Q, K, V biases
+            q_b, k_b, v_b = np.split(
+                (params["blocks"][b]["attn"]["c_attn"])["b"], 3, axis=-1)
+            self.trf_blocks[b].att.W_query.bias = assign(
+                self.trf_blocks[b].att.W_query.bias, q_b)
+            self.trf_blocks[b].att.W_key.bias = assign(
+                self.trf_blocks[b].att.W_key.bias, k_b)
+            self.trf_blocks[b].att.W_value.bias = assign(
+                self.trf_blocks[b].att.W_value.bias, v_b)
+            self.trf_blocks[b].att.out_proj.weight = assign(
+                self.trf_blocks[b].att.out_proj.weight,
+                params["blocks"][b]["attn"]["c_proj"]["w"].T)
+            self.trf_blocks[b].att.out_proj.bias = assign(
+                self.trf_blocks[b].att.out_proj.bias,
+                params["blocks"][b]["attn"]["c_proj"]["b"])
+            self.trf_blocks[b].ff.layers[0].weight = assign(
+                self.trf_blocks[b].ff.layers[0].weight,
+                params["blocks"][b]["mlp"]["c_fc"]["w"].T)
+            self.trf_blocks[b].ff.layers[0].bias = assign(
+                self.trf_blocks[b].ff.layers[0].bias,
+                params["blocks"][b]["mlp"]["c_fc"]["b"])
+            self.trf_blocks[b].ff.layers[2].weight = assign(
+                self.trf_blocks[b].ff.layers[2].weight,
+                params["blocks"][b]["mlp"]["c_proj"]["w"].T)
+            self.trf_blocks[b].ff.layers[2].bias = assign(
+                self.trf_blocks[b].ff.layers[2].bias,
+                params["blocks"][b]["mlp"]["c_proj"]["b"])
+            self.trf_blocks[b].norm1.scale = assign(
+                self.trf_blocks[b].norm1.scale,
+                params["blocks"][b]["ln_1"]["g"])
+            self.trf_blocks[b].norm1.shift = assign(
+                self.trf_blocks[b].norm1.shift,
+                params["blocks"][b]["ln_1"]["b"])
+            self.trf_blocks[b].norm2.scale = assign(
+                self.trf_blocks[b].norm2.scale,
+                params["blocks"][b]["ln_2"]["g"])
+            self.trf_blocks[b].norm2.shift = assign(
+                self.trf_blocks[b].norm2.shift,
+                params["blocks"][b]["ln_2"]["b"])
+            
+        self.final_norm.scale = assign(self.final_norm.scale, params["g"])
+        self.final_norm.shift = assign(self.final_norm.shift, params["b"])
+
+        # weight tying
+        # re-use weights of the token embedding layer now in the output layer
+        self.out_head.weight = assign(self.out_head.weight, params["wte"])
+
+class GPT_SayThing(nn.Module):
+    def __init__(self, cfg=GPT_CONFIG_124M, load=True, model_size='124M'):
+        super().__init__()
+        self.tok_emb = nn.Embedding(cfg["vocab_size"], cfg["emb_dim"])
+        self.pos_emb = nn.Embedding(cfg["context_length"], cfg["emb_dim"])
+        self.drop_emb = nn.Dropout(cfg["drop_rate"])
+        self.trf_blocks = nn.Sequential(
+            *[TransformerBlock(cfg)
+            for _ in range(cfg["n_layers"])]
+        )
+        self.final_norm = LayerNorm(cfg["emb_dim"])
+
+        # still needed for easy loading of GPT-2 pretrained weights
+        self.out_head = nn.Linear(
+            cfg["emb_dim"], cfg["vocab_size"], bias=False
+        )
+
+        self.say_head = nn.Linear(
+            cfg["emb_dim"], 33, bias=False
+        )
+
+        if load:
+            model_dir = model_size
+            tf_ckpt_path = tf.train.latest_checkpoint(model_dir)
+            print('GPT-2 checkpoint found!')
+            settings = json.load(open(os.path.join(model_dir, "hparams.json")))
+            params = self._load_gpt2_params_from_tf_ckpt(tf_ckpt_path, settings)
+            print('Loading GPT-2 weights...',end="")
+            self._load_weights_into_gpt(params)
+            print('done!')
+            # TODO: keep all frozen except last trf_block and downstream layers 
+    
+    def forward(self, in_idx):
+        batch_size, seq_len = in_idx.shape
+        tok_embeds = self.tok_emb(in_idx)
+        pos_embeds = self.pos_emb(
+            torch.arange(seq_len, device=in_idx.device)
+        )
+        x = tok_embeds + pos_embeds
+        x = self.drop_emb(x)
+        x = self.trf_blocks(x)
+        x = self.final_norm(x)
+
+        logits = self.say_head(x)
+        return logits
     
     def _load_gpt2_params_from_tf_ckpt(self, ckpt_path, settings):
         # Initialize parameters dictionary with empty blocks for each layer
