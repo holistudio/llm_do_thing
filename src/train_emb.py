@@ -5,14 +5,14 @@ import torch.nn.functional as F
 
 import tiktoken
 
-from llm.gpt2.gpt import GPT
+from llm.gpt2.gpt import GPT_SayThing
 
 def cosine_similarity(x, vectors):
     return distances
 
 LLM_emb = ...
 
-LLM_speaker = GPT()
+LLM_speaker = GPT_SayThing()
 speaker_tokenizer = tiktoken.get_encoding('gpt2')
 
 speaker_loss_function = ...
