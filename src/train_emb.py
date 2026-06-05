@@ -10,7 +10,9 @@ from llm.gpt2.gpt import GPT_SayThing
 
 
 def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
+    torch.manual_seed(1337)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
+
     LLM_emb = SentenceTransformer("all-MiniLM-L6-v2")
 
     LLM_speaker = GPT_SayThing().to(device)
@@ -76,12 +78,16 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
             speaker_optimizer.zero_grad()
             speaker_loss.backward()
             speaker_optimizer.step()
+
             if (ep+1) % 10 == 0:
                 print(f"Episode {ep}: {target_word}")
                 print(given_word_seq)
                 print(f"{guess_word}, Similarity Score={reward.item():.2f}")
                 print()
 
+            if len(word_seq) >= 4 and (word_seq[-1] == word_seq[-2]) and (word_seq[-1] == word_seq[-3]):
+                # print('3 strikes')
+                break
 
 
 if __name__ == "__main__":
