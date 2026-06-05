@@ -1,5 +1,5 @@
 import copy
-import random
+
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -29,7 +29,7 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
 
     for ep in range(train_epochs):
         # choose random word in target word list
-        target_ix = random.randint(0,len(TARGET_WORD_LIST)-1)
+        target_ix = torch.randint(0,len(TARGET_WORD_LIST),(1,)).item()
         target_word = TARGET_WORD_LIST[target_ix]
         target_word_emb = target_word_embs[target_ix]
 
