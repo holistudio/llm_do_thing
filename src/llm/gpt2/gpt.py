@@ -318,7 +318,20 @@ class GPT_SayThing(nn.Module):
             print('Loading GPT-2 weights...',end="")
             self._load_weights_into_gpt(params)
             print('done!')
-            # TODO: keep all frozen except last trf_block and downstream layers 
+
+            # freeze all layers
+            for param in self.parameters():
+                param.requires_grad = False
+
+            # unfreeze last trf_block and layer norm
+            for param in self.trf_blocks[-1].parameters():
+                param.requires_grad = True
+            for param in self.final_norm.parameters():
+                param.requires_grad = True
+                
+            # unfreeze output head
+            for param in self.say_head.parameters():
+                param.requires_grad = True 
     
     def forward(self, in_idx):
         batch_size, seq_len = in_idx.shape
