@@ -72,7 +72,7 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
             # get best guess word embedding
             guess_ix = torch.argmax(scores)
             guess_word_emb = guesser_emb_bag[guess_ix]
-            guess_word = TARGET_WORD_LIST[guess_ix]
+            guess_word = guesser_word_bag[guess_ix]
 
             reward = util.cos_sim(target_word_emb, guess_word_emb)
 
