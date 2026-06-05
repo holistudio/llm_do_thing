@@ -62,9 +62,9 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
             word_seq_emb = LLM_emb.encode(given_word_seq, convert_to_tensor=True)
 
             # perform cosine similarity b/w word_seq_emb and all target_word_embs
-            distances = util.cos_sim(word_seq_emb, target_word_embs)
+            scores = util.cos_sim(word_seq_emb, target_word_embs)
             # get best guess word embedding
-            guess_ix = torch.argmax(distances)
+            guess_ix = torch.argmax(scores)
             guess_word_emb = target_word_embs[guess_ix]
             guess_word = TARGET_WORD_LIST[guess_ix]
 
