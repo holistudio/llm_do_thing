@@ -1,5 +1,5 @@
 import random
-
+import numpy as np
 import torch
 import torch.nn.functional as F
 
@@ -21,7 +21,7 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
 
     SAY_THING_VOCAB = say_thing_vocab
 
-    target_word_embs = torch.tensor([LLM_emb.encode(word) for word in TARGET_WORD_LIST])
+    target_word_embs = torch.tensor(np.array([LLM_emb.encode(word) for word in TARGET_WORD_LIST]))
 
     for ep in range(train_epochs):
         # choose random word in target word list
@@ -76,9 +76,9 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
             speaker_loss.backward()
             speaker_optimizer.step()
             if (ep+1) % 10 == 0:
-                print(target_word)
+                print(f"Episode {ep}: {target_word}")
                 print(given_word_seq)
-                print(guess_word, reward)
+                print(f"{guess_word}, Similarity Score={reward.item():.2f}")
                 print()
 
 
