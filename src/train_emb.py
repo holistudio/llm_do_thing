@@ -36,7 +36,8 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
         speak_str = target_word
 
         given_word_seq =  []
-        guesser_word_bag = copy.deepcopy(target_word_embs)
+        guesser_word_bag = copy.deepcopy(TARGET_WORD_LIST)
+        guesser_emb_bag = copy.deepcopy(target_word_embs)
 
         for _ in range(num_rounds):
             # pass to tokenizer
@@ -66,11 +67,11 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
             # pass given_word_seq to LLM_emb
             word_seq_emb = LLM_emb.encode(given_word_seq, convert_to_tensor=True).to(device=device)
 
-            # perform cosine similarity b/w word_seq_emb and all guesser_word_bag
-            scores = util.cos_sim(word_seq_emb, guesser_word_bag)
+            # perform cosine similarity b/w word_seq_emb and all guesser_emb_bag
+            scores = util.cos_sim(word_seq_emb, guesser_emb_bag)
             # get best guess word embedding
             guess_ix = torch.argmax(scores)
-            guess_word_emb = guesser_word_bag[guess_ix]
+            guess_word_emb = guesser_emb_bag[guess_ix]
             guess_word = TARGET_WORD_LIST[guess_ix]
 
             reward = util.cos_sim(target_word_emb, guess_word_emb)
@@ -94,7 +95,8 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
             if target_word == guess_word:
                 break
             else:
-                guesser_word_bag = torch.cat((guesser_word_bag[:guess_ix], guesser_word_bag[guess_ix+1:]), dim=0)
+                guesser_word_bag.pop(guess_ix)
+                guesser_emb_bag = torch.cat((guesser_emb_bag[:guess_ix], guesser_emb_bag[guess_ix+1:]), dim=0)
 
 
 if __name__ == "__main__":
