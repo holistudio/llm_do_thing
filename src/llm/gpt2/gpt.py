@@ -1,5 +1,7 @@
 import json
 import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"      # hides INFO/WARNING C++ logs
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"     # silences the oneDNN notice
 
 import numpy as np
 
