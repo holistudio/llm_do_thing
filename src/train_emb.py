@@ -9,7 +9,7 @@ from sentence_transformers import SentenceTransformer, util
 from llm.gpt2.gpt import GPT_SayThing
 
 
-def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
+def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
     LLM_emb = SentenceTransformer("all-MiniLM-L6-v2")
 
     LLM_speaker = GPT_SayThing()
@@ -75,6 +75,12 @@ def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
             speaker_optimizer.zero_grad()
             speaker_loss.backward()
             speaker_optimizer.step()
+            if (ep+1) % 10 == 0:
+                print(target_word)
+                print(given_word_seq)
+                print(guess_word, reward)
+                print()
+
 
 
 if __name__ == "__main__":
