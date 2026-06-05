@@ -19,7 +19,7 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
     LLM_speaker = GPT_SayThing().to(device)
     speaker_tokenizer = tiktoken.get_encoding('gpt2')
 
-    speaker_optimizer = torch.optim.AdamW(LLM_speaker.parameters(), lr=3e-4, weight_decay=0.1)
+    speaker_optimizer = torch.optim.AdamW(LLM_speaker.parameters(), lr=1e-6, weight_decay=0.1) #lr=3e-4 TOO HIGH
 
     TARGET_WORD_LIST = word_list
 
