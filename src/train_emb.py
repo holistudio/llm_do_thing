@@ -4,26 +4,24 @@ import torch
 import torch.nn.functional as F
 
 import tiktoken
+from sentence_transformers import SentenceTransformer, util
 
 from llm.gpt2.gpt import GPT_SayThing
 
-def cosine_similarity(x, vectors):
-    return distances
 
 def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
-    LLM_emb = ...
+    LLM_emb = SentenceTransformer("all-MiniLM-L6-v2")
 
     LLM_speaker = GPT_SayThing()
     speaker_tokenizer = tiktoken.get_encoding('gpt2')
 
-    speaker_optimizer = ...
-    speaker_scheduler = ...
+    speaker_optimizer = torch.optim.AdamW(LLM_speaker.parameters(), lr=3e-4, weight_decay=0.1)
 
     TARGET_WORD_LIST = word_list
 
     SAY_THING_VOCAB = say_thing_vocab
 
-    target_word_embs = torch.tensor([LLM_emb(word) for word in TARGET_WORD_LIST])
+    target_word_embs = torch.tensor([LLM_emb.encode(word) for word in TARGET_WORD_LIST])
 
     for ep in range(train_epochs):
         # choose random word in target word list
@@ -58,28 +56,25 @@ def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
 
             # get word_seq
             word_seq = speak_str.split(" ")
-
-
-            given_word_seq = word_seq[1:]
+            given_word_seq = " ".join(word_seq[1:])
 
             # pass given_word_seq to LLM_emb
-            word_seq_emb = LLM_emb(given_word_seq)
+            word_seq_emb = LLM_emb.encode(given_word_seq, convert_to_tensor=True)
 
             # perform cosine similarity b/w word_seq_emb and all target_word_embs
-            distances = cosine_similarity(word_seq_emb, target_word_embs)
+            distances = util.cos_sim(word_seq_emb, target_word_embs)
             # get best guess word embedding
             guess_ix = torch.argmax(distances)
             guess_word_emb = target_word_embs[guess_ix]
             guess_word = TARGET_WORD_LIST[guess_ix]
 
-            reward = cosine_similarity(target_word_emb, guess_word_emb)
+            reward = util.cos_sim(target_word_emb, guess_word_emb)
 
             speaker_loss = -reward * log_prob
 
             speaker_optimizer.zero_grad()
             speaker_loss.backward()
             speaker_optimizer.step()
-            speaker_scheduler.step()
 
 
 if __name__ == "__main__":
