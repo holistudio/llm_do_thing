@@ -42,7 +42,7 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
             speak_logits = LLM_speaker(speak_token_ids)
             # get logits, log_probs
             speak_logits = speak_logits[:, -1, :]
-            log_probs = F.log_softmax(speak_logits)
+            log_probs = F.log_softmax(speak_logits, dim=-1)
 
             # use logits/probs to sample from SAY_THING_VOCAB
             probs = torch.exp(log_probs)
