@@ -96,6 +96,7 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
             if target_word == guess_word:
                 break
             else:
+                # remove guessed word from possible future guesses in this episode
                 guesser_word_bag.pop(guess_ix)
                 guesser_emb_bag = torch.cat((guesser_emb_bag[:guess_ix], guesser_emb_bag[guess_ix+1:]), dim=0)
 
