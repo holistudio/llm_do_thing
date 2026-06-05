@@ -84,7 +84,7 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
 
             if (ep+1) % 100 == 0:
                 print(f"episode {ep}: {target_word}")
-                print(given_word_seq)
+                print(f"{given_word_seq}, prob={torch.exp(log_prob).item():.3f}")
                 print(f"{guess_word}, similarity score={reward.item():.2f}")
                 print()
 
