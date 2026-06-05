@@ -291,7 +291,7 @@ class GPT(nn.Module):
         self.out_head.weight = assign(self.out_head.weight, params["wte"])
 
 class GPT_SayThing(nn.Module):
-    def __init__(self, cfg=GPT_CONFIG_124M, load=True, model_size='124M'):
+    def __init__(self, cfg=GPT_CONFIG_124M, load=True, freeze=True, model_size='124M'):
         super().__init__()
         self.tok_emb = nn.Embedding(cfg["vocab_size"], cfg["emb_dim"])
         self.pos_emb = nn.Embedding(cfg["context_length"], cfg["emb_dim"])
@@ -320,7 +320,8 @@ class GPT_SayThing(nn.Module):
             print('Loading GPT-2 weights...',end="")
             self._load_weights_into_gpt(params)
             print('done!')
-
+        
+        if freeze:
             # freeze all layers
             for param in self.parameters():
                 param.requires_grad = False
