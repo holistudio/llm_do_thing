@@ -310,10 +310,10 @@ class GPT_SayThing(nn.Module):
         )
 
         if load:
-            model_dir = model_size
+            model_dir = os.path.join('llm', 'gpt2', model_size)
             tf_ckpt_path = tf.train.latest_checkpoint(model_dir)
             print('GPT-2 checkpoint found!')
-            settings = json.load(open(os.path.join('llm', 'gpt2', model_dir, "hparams.json")))
+            settings = json.load(open(os.path.join(model_dir, "hparams.json")))
             params = self._load_gpt2_params_from_tf_ckpt(tf_ckpt_path, settings)
             print('Loading GPT-2 weights...',end="")
             self._load_weights_into_gpt(params)
