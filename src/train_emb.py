@@ -9,7 +9,7 @@ from sentence_transformers import SentenceTransformer, util
 from llm.gpt2.gpt import GPT_SayThing
 
 
-def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
+def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
     torch.manual_seed(1337)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
 
@@ -79,7 +79,7 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
             speaker_loss.backward()
             speaker_optimizer.step()
 
-            if (ep+1) % 10 == 0:
+            if (ep+1) % 100 == 0:
                 print(f"episode {ep}: {target_word}")
                 print(given_word_seq)
                 print(f"{guess_word}, similarity score={reward.item():.2f}")
