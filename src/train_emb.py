@@ -1,3 +1,4 @@
+import copy
 import random
 import numpy as np
 import torch
@@ -35,6 +36,7 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
         speak_str = target_word
 
         given_word_seq =  []
+        guesser_word_bag = copy.deepcopy(target_word_embs)
 
         for _ in range(num_rounds):
             # pass to tokenizer
@@ -64,11 +66,11 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
             # pass given_word_seq to LLM_emb
             word_seq_emb = LLM_emb.encode(given_word_seq, convert_to_tensor=True).to(device=device)
 
-            # perform cosine similarity b/w word_seq_emb and all target_word_embs
-            scores = util.cos_sim(word_seq_emb, target_word_embs)
+            # perform cosine similarity b/w word_seq_emb and all guesser_word_bag
+            scores = util.cos_sim(word_seq_emb, guesser_word_bag)
             # get best guess word embedding
             guess_ix = torch.argmax(scores)
-            guess_word_emb = target_word_embs[guess_ix]
+            guess_word_emb = guesser_word_bag[guess_ix]
             guess_word = TARGET_WORD_LIST[guess_ix]
 
             reward = util.cos_sim(target_word_emb, guess_word_emb)
@@ -88,6 +90,11 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
             if len(word_seq) >= 4 and (word_seq[-1] == word_seq[-2]) and (word_seq[-1] == word_seq[-3]):
                 # print('3 strikes')
                 break
+
+            if target_word == guess_word:
+                break
+            else:
+                guesser_word_bag = torch.cat((guesser_word_bag[:guess_ix], guesser_word_bag[guess_ix+1:]), dim=0)
 
 
 if __name__ == "__main__":
