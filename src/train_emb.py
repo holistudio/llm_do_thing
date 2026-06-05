@@ -10,9 +10,10 @@ from llm.gpt2.gpt import GPT_SayThing
 
 
 def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
     LLM_emb = SentenceTransformer("all-MiniLM-L6-v2")
 
-    LLM_speaker = GPT_SayThing()
+    LLM_speaker = GPT_SayThing().to(device)
     speaker_tokenizer = tiktoken.get_encoding('gpt2')
 
     speaker_optimizer = torch.optim.AdamW(LLM_speaker.parameters(), lr=3e-4, weight_decay=0.1)
@@ -21,7 +22,7 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
 
     SAY_THING_VOCAB = say_thing_vocab
 
-    target_word_embs = torch.tensor(np.array([LLM_emb.encode(word) for word in TARGET_WORD_LIST]))
+    target_word_embs = torch.tensor(np.array([LLM_emb.encode(word) for word in TARGET_WORD_LIST]), device=device)
 
     for ep in range(train_epochs):
         # choose random word in target word list
@@ -36,7 +37,7 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
         for _ in range(num_rounds):
             # pass to tokenizer
             speak_token_ids = speaker_tokenizer.encode(speak_str)
-            speak_token_ids = torch.tensor(speak_token_ids, dtype=torch.long).unsqueeze(0)
+            speak_token_ids = torch.tensor(speak_token_ids, dtype=torch.long, device=device).unsqueeze(0)
 
             # pass tokens to LLM_speaker
             speak_logits = LLM_speaker(speak_token_ids)
@@ -59,7 +60,7 @@ def main(word_list, say_thing_vocab, train_epochs=100, num_rounds=10):
             given_word_seq = " ".join(word_seq[1:])
 
             # pass given_word_seq to LLM_emb
-            word_seq_emb = LLM_emb.encode(given_word_seq, convert_to_tensor=True)
+            word_seq_emb = LLM_emb.encode(given_word_seq, convert_to_tensor=True).to(device=device)
 
             # perform cosine similarity b/w word_seq_emb and all target_word_embs
             scores = util.cos_sim(word_seq_emb, target_word_embs)
