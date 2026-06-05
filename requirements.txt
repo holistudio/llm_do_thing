@@ -6,3 +6,4 @@ ipywidgets
 scikit-learn
 tensorflow
 tiktoken
+sentence_transformers
