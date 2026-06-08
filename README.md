@@ -50,6 +50,7 @@ Default training settings:
 - 1000 training episodes
 - 10 rounds: `LLM_speaker` can output up to 10 words from *Say Thing Vocabulary*.
 - "3 strikes" for repeated words: If `LLM_speaker` says the same word three times, the episode ends early (because why would anyone say the same word more than two times if it's not helping the guesser?)
+- `LLM_speaker` currently uses the GPT-2 architecture with 124M pre-trained weights from OpenAI (run `python gpt_download.py` within its local directory). For fine tuning, the default is to keep all parameters frozen except the last transformer block/layer and output layer.
 
 Example output:
 
