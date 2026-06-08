@@ -42,7 +42,7 @@ Basic setup/training parameters
 When the learning rate is `3e-4` this last constraint gets triggered all the time:
 
 ```
-episode 699: whisper # target word
+episode 699: whisper # target word for the training episode
 thing, prob=0.999, log_prob=-0.0005460678366944194 # for the last word predicted by LLM_speaker
 shadow, similarity score=0.30 # guesser's word
 loss=0.00016157238860614598
@@ -64,38 +64,38 @@ I tried a few other things like forcing random word exploration, but eventually 
 
 ```
 episode 699: whisper
-use, prob=0.642, log_prob=-0.4437656104564667
+use, prob=0.642, log_prob=-0.444
 library, similarity score=0.18
-loss=0.07844097912311554
+loss=0.078
 
 episode 699: whisper
-use make, prob=0.353, log_prob=-1.0413274765014648
+use make, prob=0.353, log_prob=-1.041
 kitchen, similarity score=0.29
-loss=0.3008196949958801
+loss=0.301
 
 episode 699: whisper
-use make use, prob=0.625, log_prob=-0.4695451855659485
+use make use, prob=0.625, log_prob=-0.470
 harvest, similarity score=0.20
-loss=0.09222186356782913
+loss=0.092
 
 episode 699: whisper
-use make use fast, prob=0.022, log_prob=-3.8264951705932617
+use make use fast, prob=0.022, log_prob=-3.826
 bakery, similarity score=0.15
-loss=0.5789857506752014
+loss=0.579
 
 episode 699: whisper
-use make use fast use, prob=0.275, log_prob=-1.2911055088043213
+use make use fast use, prob=0.275, log_prob=-1.291
 whisper, similarity score=1.00
-loss=1.2911056280136108
+loss=1.291
 ```
 
 So now at least by some luck, the guesser finds the target word. Here's another lucky (hilarious) example.
 
 ```
 episode 399: elephant
-real use thing use use fast thing thing use, prob=0.476, log_prob=-0.7422893047332764
+real use thing use use fast thing thing use, prob=0.476, log_prob=-0.742
 elephant, similarity score=1.00
-loss=0.7422893643379211
+loss=0.742
 ```
 
 Just imagine you had a board in front of you with a list of the target words and then some person just said to you "real use thing use use fast thing thing use"...would you be able to know they meant to say "elephant"?
