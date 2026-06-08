@@ -1,0 +1,98 @@
+import random
+
+import torch
+
+from llm.gpt2.gpt import GPT
+
+def word_sampling(logits, word_complete, tokenizer, word_set=None):
+    return word_part, word_complete
+
+def reward_function(target_word, guess_word, given_word_seq, emb_model=None):
+    if target_word == guess_word:
+        return 1
+    return 0
+
+def main(word_list, say_thing_vocab, train_epochs=10, num_rounds=10):
+    TARGET_WORD_LIST = word_list
+
+    SAY_THING_VOCAB = say_thing_vocab
+
+    speaker = GPT()
+    guesser = GPT()
+
+    speaker_tokenizer = ...
+    guesser_tokenizer = ...
+
+    speaker_loss_function = ...
+    speaker_optimizer = ...
+    speaker_scheduler = ...
+
+    # guesser_loss_function = ...
+    # guesser_optimizer = ...
+    # guesser_scheduler = ...
+
+    for ep in range(train_epochs):
+
+        target_word = TARGET_WORD_LIST[random.randint(0,len(TARGET_WORD_LIST)-1)]
+
+        speak_str = target_word
+
+        given_word_seq =  []
+
+        while len(given_word_seq) < num_rounds:
+
+            speak_word_complete = False
+            while not speak_word_complete:
+                speak_token_ids = speaker_tokenizer.encode(speak_str)
+                speak_token_ids = torch.tensor(speak_token_ids, dtype=torch.long).unsqueeze(0)
+
+                speak_logits = speaker(speak_token_ids)
+                speak_logits = speak_logits[:, -1, :]
+
+                speak_word_part, speak_word_complete = word_sampling(speak_logits, speak_word_complete, speaker_tokenizer, word_set=SAY_THING_VOCAB)
+                # speak_word_part, speak_word_complete = word_sampling(speak_logits, speak_word_complete, word_set=None)
+                speak_str += speak_word_part
+                
+            word_seq = speak_str.split(", ")
+
+            given_word_seq = word_seq[1:]
+            guess_str = ", ".join(given_word_seq)
+            guess_str += " | "
+
+            guess_word_complete = False
+            while not guess_word_complete:
+                guess_token_ids = guesser_tokenizer.encode(guess_str)
+                guess_token_ids = torch.tensor(guess_token_ids, dtype=torch.long).unsqueeze(0)
+
+                guess_logits = guesser(guess_token_ids)
+                guess_logits = guess_logits[:, -1, :]
+
+                guess_word_part, guess_word_complete = word_sampling(guess_logits, guess_word_complete, guesser_tokenizer, word_set=TARGET_WORD_LIST)
+                guess_str += guess_word_part
+
+            guess_word = guess_str.split(" | ")[-1]
+
+            reward = reward_function(target_word, guess_word, given_word_seq)
+
+            speaker_optimizer.zero_grad()
+            speaker_loss = speaker_loss_function(reward)
+            speaker_loss.backward()
+
+            # guesser_optimizer.zero_grad()
+            # guesser_loss = guesser_loss_function(reward)
+            # guesser_loss.backward()
+
+            speaker_optimizer.step()
+            speaker_scheduler.step()
+
+            # guesser_optimizer.step()
+            # guesser_scheduler.step()
+
+if __name__ == "__main__":
+    with open("website_word_list.txt", "r") as f:
+        word_list = f.read().split('\n')
+
+    with open("say_thing_vocabulary.txt", "r") as f:
+        say_thing_vocab = f.read().split('\n')
+
+    main(word_list, say_thing_vocab)
