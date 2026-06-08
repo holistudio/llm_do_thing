@@ -6,11 +6,15 @@ This is the word game *Person Do Thing*:
 
 Imagine you see the word "fireworks" on a card. This is your *target word* that I have to guess. The only words you are allowed to say are the 33 words on the bigger card shown above, the **Say Thing Vocabulary**.
 
+How would you describe fireworks using only those 33 words? Maybe "hot thing go far up fast after big many hot thing"?
+
 (you can also play [person-do-thing](https://persondothing.com/) online with friends)
 
 ## The Idea
 
-One day as I played this game with friends at [The Recurse Center](https://www.recurse.com/), I started to think about how to train LLMs to also do this and more specifically, how an LLM can be finetuned to output a sequence of words from the *Say Thing Vocabulary*. How would the finetuning process work? And more importantly, what words would the LLM end up choosing? Would we mere humans also be able to tell what word the LLM is trying to communicate?
+One day as I played this game with friends at [The Recurse Center](https://www.recurse.com/), I started to think about how to train LLMs to also do this and more specifically, how an LLM can be finetuned to output a sequence of words from the *Say Thing Vocabulary*. How would the finetuning process work? 
+
+And more importantly, what words would the LLM end up choosing? Would we mere humans also be able to tell what word the LLM is trying to communicate?
 
 ## The Current Approach
 
@@ -18,9 +22,11 @@ The current idea is to use some form of reinforcement learning to finetune a pre
 
 <img src="./docs/260604_RL_idea.png">
 
-1. After receiving one of the possible target words as initial input, `LLM_speaker` spits out a sequence of words among the limited list of words in *Say Thing Vocabulary*.
-2. For each word added to the sequence, an `LLM_embedding` model can convert the sequence into an embedding vector and compare that to all possible target words' embedding via cosine similarity. The guess word is the one with the highest cosine similarity with the `LLM_speaker`'s word sequence.
+0. Let's assume the list of possible target words is limited to the 64 possible words from [persondothing.com](https://persondothing.com/) listed in [website_word_list.txt](./src/website_word_list.txt) and that the guesser has access to this list.
+1. After receiving one of the possible target words as initial input, `LLM_speaker` spits out a sequence of words among the limited list in *Say Thing Vocabulary*.
+2. Each time `LLM_speaker` adds a word to the word sequence, an `LLM_embedding` model can convert the word sequence into an embedding vector and compare that to all possible target words' embeddings via cosine similarity. The guess word is the one with the highest cosine similarity with the `LLM_speaker`'s word sequence.
 3. A reward function provides feedback signal back to the `LLM_speaker` based on the cosine similarity between the target and guess word.
+4. This can continue for let's say up to 10 rounds, or until the guess word is the same as the target word. Then the game resets with a new random target word.
 
 That's it for now, this is still very much work in progress. More specifics can be found in the code and [DEVLOG](./docs/DEVLOG.md).
 
