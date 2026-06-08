@@ -28,6 +28,7 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
     LLM_emb = SentenceTransformer("all-MiniLM-L6-v2")
     target_word_embs = torch.tensor(np.array([LLM_emb.encode(word) for word in TARGET_WORD_LIST]), device=device)
 
+    print(f"\nTraining {train_epochs} episodes begin!")
     for ep in range(train_epochs):
         # choose random word in target word list
         # get embedding vector
@@ -89,9 +90,9 @@ def main(word_list, say_thing_vocab, train_epochs=1000, num_rounds=10):
 
             if (ep+1) % 100 == 0:
                 print(f"episode {ep}: {target_word}")
-                print(f"{given_word_seq}, prob={torch.exp(log_prob).item():.3f}, log_prob={log_prob.item()}")
+                print(f"{given_word_seq}, prob={torch.exp(log_prob).item():.3f}, log_prob={log_prob.item():.3f}")
                 print(f"{guess_word}, similarity score={reward.item():.2f}")
-                print(f"loss={speaker_loss.item()}")
+                print(f"loss={speaker_loss.item():.3f}")
                 print()
 
             # game ends early if LLM_speaker outputs the same Say-Thing
