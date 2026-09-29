@@ -17,7 +17,7 @@ binoculars
 blink
 bookcase
 boomerang
-brave 
+brave
 break
 bright
 bulldozer
@@ -54,7 +54,7 @@ desk
 detective
 discipline
 dishwasher
-doorbells 
+doorbells
 dozen
 earth
 eclipse
