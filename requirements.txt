@@ -7,3 +7,6 @@ scikit-learn
 tensorflow
 tiktoken
 sentence_transformers
+transformers
+jinja2
+pytest
