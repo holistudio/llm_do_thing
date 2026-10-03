@@ -187,3 +187,5 @@ cython_debug/
 
 *.DS_Store
 /src/llm/gpt2/124M
+
+/.claude
