@@ -6,23 +6,18 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 DATA_DIR = REPO_ROOT / "data"
 
-SAY_VOCAB_PATH = DATA_DIR / 'say_thing_vocabulary.txt'
-
-def load_words(path):
-    words = [line.strip() for line in path.read_text(encoding='utf-8').splitlines()]
-    words = [w for w in words if w]
-    assert len(words) == len(set(words)), f"{path.name} has duplicate words"
-    return words
-
-vocab = load_words(SAY_VOCAB_PATH)
-print(f'say thing vocab has {len(vocab)} words\n') # just a sanity check
-
 TARGET_LIST_PATH = DATA_DIR / 'deck_hard_list.txt' 
 PREP_TARGET_PATH = DATA_DIR / 'prep_targets.npz'
 
 EMBED_MODEL = "Qwen/Qwen3-Embedding-0.6B"
 EVAL_FRACTION = 0.2
 SPLIT_SEED = 1337
+
+def load_words(path):
+    words = [line.strip() for line in path.read_text(encoding='utf-8').splitlines()]
+    words = [w for w in words if w]
+    assert len(words) == len(set(words)), f"{path.name} has duplicate words"
+    return words
 
 def embed_words(words, model_name=EMBED_MODEL, device="cpu"):
     from sentence_transformers import SentenceTransformer
@@ -36,7 +31,8 @@ def embed_words(words, model_name=EMBED_MODEL, device="cpu"):
         show_progress_bar=True
     )
 
-    return embeddings.astype(np.float32)
+    embeddings = embeddings.astype(np.float32)
+    return embeddings / np.linalg.norm(embeddings, axis=1, keepdims=True)
 
 def similarity_matrix(embeddings):
     S = np.clip(embeddings @ embeddings.T, -1.0, 1.0)
@@ -100,6 +96,10 @@ def load_prep(path=PREP_TARGET_PATH):
     return prep
 
 if __name__ == '__main__':
+    SAY_VOCAB_PATH = DATA_DIR / 'say_thing_vocabulary.txt'
+    vocab = load_words(SAY_VOCAB_PATH)
+    print(f'say thing vocab has {len(vocab)} words\n') # just a sanity check
+
     targets = load_words(TARGET_LIST_PATH)
     n = len(targets)
     emb_targets = embed_words(targets)
@@ -108,4 +108,5 @@ if __name__ == '__main__':
     train_idx, eval_idx = train_eval_split(n)
     report(targets, S, mu)
     save(targets, emb_targets, S, mu, train_idx, eval_idx)
+    load_prep()
 
