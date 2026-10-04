@@ -190,3 +190,4 @@ cython_debug/
 
 /.claude
 /unsloth_compiled_cache
+/docs/tutorials
