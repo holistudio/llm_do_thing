@@ -8,6 +8,7 @@ DATA_DIR = REPO_ROOT / "data"
 
 TARGET_LIST_PATH = DATA_DIR / 'deck_hard_list.txt' 
 PREP_TARGET_PATH = DATA_DIR / 'prep_targets.npz'
+SAY_VOCAB_PATH = DATA_DIR / 'say_thing_vocabulary.txt'
 
 EMBED_MODEL = "Qwen/Qwen3-Embedding-0.6B"
 EVAL_FRACTION = 0.2
@@ -96,7 +97,6 @@ def load_prep(path=PREP_TARGET_PATH):
     return prep
 
 if __name__ == '__main__':
-    SAY_VOCAB_PATH = DATA_DIR / 'say_thing_vocabulary.txt'
     vocab = load_words(SAY_VOCAB_PATH)
     print(f'say thing vocab has {len(vocab)} words\n') # just a sanity check
 
