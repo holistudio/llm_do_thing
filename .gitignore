@@ -189,3 +189,4 @@ cython_debug/
 /src/llm/gpt2/124M
 
 /.claude
+/unsloth_compiled_cache
