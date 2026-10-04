@@ -10,3 +10,27 @@ sentence_transformers
 transformers
 jinja2
 pytest
+
+# llm_thinking
+# Install unsloth with --no-deps first and check whether the resolver tries to
+# move torch (currently 2.12.0+cu130). If it does, keep the pinned torch and
+# add the deps below by hand.
+unsloth
+unsloth_zoo
+peft
+accelerate
+datasets
+trl                 # not needed for the plain-PyTorch loop; for GRPOTrainer later
+openai              # client for the llama.cpp llama-server endpoint
+wandb
+
+# NOT pip-installable: llama.cpp must be built from source with CUDA in WSL2.
+# `llama-server` provides the guesser's OpenAI-compatible endpoint and the GBNF
+# grammar that constrains guesses to the target word list.
+
+# Deliberately excluded:
+#   vllm   -- preallocates VRAM needed for training, no Qwen3.5 support in 0.16,
+#             and pins torch/transformers in ways that break the transformers v5
+#             requirement
+#   ollama -- redundant with llama-server and cannot do GBNF grammars
+#   nltk   -- unused by the current plan
